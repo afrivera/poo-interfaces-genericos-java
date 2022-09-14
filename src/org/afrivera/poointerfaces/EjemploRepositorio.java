@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EjemploRepositorio {
     public static void main(String[] args) {
-        CrudRepositorio repo = new ClienteListRepositorio();
+        OrdenablePaginableCrudRepositorio repo = new ClienteListRepositorio();
         repo.crearCliente(new Cliente("Jano", "Perez"));
         repo.crearCliente(new Cliente("Bea", "Gonzalez"));
         repo.crearCliente(new Cliente("Luci", "Martinez"));
@@ -17,10 +17,10 @@ public class EjemploRepositorio {
         // clientes.forEach(cliente -> System.out.println(cliente)); se puede resumir
         clientes.forEach(System.out::println);
         System.out.println("=".repeat(40));
-        List<Cliente> paginable = ((PaginableRepositorio)repo).listar(1, 3);// indice 1 y indice 2 excluye el 3
+        List<Cliente> paginable = repo.listar(1, 3);// indice 1 y indice 2 excluye el 3
         paginable.forEach(System.out::println);
         System.out.println("=".repeat(40));
-        List<Cliente> clienteOrdenAsc = ((OrdenableRepositorio)repo).listar("nombre", Direccion.ASC);
+        List<Cliente> clienteOrdenAsc = repo.listar("nombre", Direccion.ASC);
 
         for(Cliente c: clienteOrdenAsc){
             System.out.println(c);
@@ -35,8 +35,11 @@ public class EjemploRepositorio {
         System.out.println(bea);
 
         System.out.println("=============Eliminar===================");
-        //repo.eliminarCliente(2);
+        repo.eliminarCliente(2);
         repo.listar().forEach(System.out::println);
+
+        System.out.println("================= Total =================");
+        System.out.println("Total => " + repo.total());
 
 
     }
