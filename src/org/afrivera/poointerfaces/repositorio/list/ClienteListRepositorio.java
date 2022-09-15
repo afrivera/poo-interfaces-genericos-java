@@ -1,51 +1,19 @@
-package org.afrivera.poointerfaces.repositorio;
+package org.afrivera.poointerfaces.repositorio.list;
 
 import org.afrivera.poointerfaces.modelo.Cliente;
+import org.afrivera.poointerfaces.repositorio.AbstractaListRepositorio;
+import org.afrivera.poointerfaces.repositorio.Direccion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio{
-
-    private List<Cliente> dataSource;
-
-    public ClienteListRepositorio() {
-        this.dataSource = new ArrayList<>();
-    }
+public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
     @Override
-    public List<Cliente> listar() {
-        return dataSource;
-    }
-
-    @Override
-    public Cliente porId(Integer id) {
-        Cliente resultado = null;
-        for(Cliente cli: dataSource){
-            if(cli.getId()!= null && cli.getId().equals(id)){
-                resultado = cli;
-                break;
-            }
-        }
-        return resultado;
-    }
-
-    @Override
-    public void crearCliente(Cliente cliente) {
-        this.dataSource.add(cliente);
-    }
-
-    @Override
-    public void editarCliente(Cliente cliente) {
+    public void editar(Cliente cliente) {
         Cliente c = this.porId(cliente.getId());
         c.setNombre(cliente.getNombre());
         c.setApellido(cliente.getApellido());
-    }
-
-    @Override
-    public void eliminarCliente(Integer id) {
-        // Cliente c = this.porId(id);
-        this.dataSource.remove(this.porId(id));
     }
 
     @Override
@@ -67,11 +35,6 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
         return listaOrdenada;
     }
 
-    @Override
-    public List<Cliente> listar(int desde, int hasta) {
-        return dataSource.subList(desde, hasta);
-    }
-
     public static int ordenar(Cliente a, Cliente b, String campo){
         int resultado = 0;
         switch (campo){
@@ -85,8 +48,4 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
         return resultado;
     }
 
-    @Override
-    public int total() {
-        return this.dataSource.size();
-    }
 }

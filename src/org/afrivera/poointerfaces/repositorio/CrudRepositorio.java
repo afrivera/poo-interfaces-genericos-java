@@ -1,14 +1,13 @@
 package org.afrivera.poointerfaces.repositorio;
 
-import org.afrivera.poointerfaces.modelo.Cliente;
 
 import java.util.List;
 
-public interface CrudRepositorio {
+public interface CrudRepositorio<T> {
 
-    List<Cliente> listar();
-    Cliente porId(Integer id);
-    void crearCliente(Cliente cliente);
-    void editarCliente(Cliente cliente);
-    void eliminarCliente(Integer id);
+    List<T> listar();
+    T porId(Integer id);
+    void crear(T t);
+    void editar(T t);
+    void eliminar(Integer id);
 }

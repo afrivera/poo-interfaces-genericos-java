@@ -1,6 +1,6 @@
 package org.afrivera.poointerfaces.repositorio;
 
-public interface OrdenablePaginableCrudRepositorio extends OrdenableRepositorio,
-        PaginableRepositorio, CrudRepositorio, ContableRepositorio{
+public interface OrdenablePaginableCrudRepositorio<T> extends OrdenableRepositorio<T>,
+        PaginableRepositorio<T>, CrudRepositorio<T>, ContableRepositorio{
 
 }

@@ -2,16 +2,17 @@ package org.afrivera.poointerfaces;
 
 import org.afrivera.poointerfaces.modelo.Cliente;
 import org.afrivera.poointerfaces.repositorio.*;
+import org.afrivera.poointerfaces.repositorio.list.ClienteListRepositorio;
 
 import java.util.List;
 
 public class EjemploRepositorio {
     public static void main(String[] args) {
-        OrdenablePaginableCrudRepositorio repo = new ClienteListRepositorio();
-        repo.crearCliente(new Cliente("Jano", "Perez"));
-        repo.crearCliente(new Cliente("Bea", "Gonzalez"));
-        repo.crearCliente(new Cliente("Luci", "Martinez"));
-        repo.crearCliente(new Cliente("Andres", "Rivera"));
+        OrdenablePaginableCrudRepositorio<Cliente> repo = new ClienteListRepositorio();
+        repo.crear(new Cliente("Jano", "Perez"));
+        repo.crear(new Cliente("Bea", "Gonzalez"));
+        repo.crear(new Cliente("Luci", "Martinez"));
+        repo.crear(new Cliente("Andres", "Rivera"));
 
         List<Cliente> clientes =repo.listar();
         // clientes.forEach(cliente -> System.out.println(cliente)); se puede resumir
@@ -30,12 +31,12 @@ public class EjemploRepositorio {
         System.out.println("============ Editar =================");
         Cliente beaUpdate = new Cliente("Bea", "Mena");
         beaUpdate.setId(2);
-        repo.editarCliente(beaUpdate);
+        repo.editar(beaUpdate);
         Cliente bea = repo.porId(2);
         System.out.println(bea);
 
         System.out.println("=============Eliminar===================");
-        repo.eliminarCliente(2);
+        repo.eliminar(2);
         repo.listar().forEach(System.out::println);
 
         System.out.println("================= Total =================");
