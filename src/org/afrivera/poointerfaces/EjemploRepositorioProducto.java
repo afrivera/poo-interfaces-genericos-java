@@ -4,13 +4,15 @@ import org.afrivera.poointerfaces.modelo.Cliente;
 import org.afrivera.poointerfaces.modelo.Producto;
 import org.afrivera.poointerfaces.repositorio.Direccion;
 import org.afrivera.poointerfaces.repositorio.OrdenablePaginableCrudRepositorio;
+import org.afrivera.poointerfaces.repositorio.excepciones.AccesoDatoException;
+import org.afrivera.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 import org.afrivera.poointerfaces.repositorio.list.ClienteListRepositorio;
 import org.afrivera.poointerfaces.repositorio.list.ProductoListrepositorio;
 
 import java.util.List;
 
 public class EjemploRepositorioProducto {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AccesoDatoException {
         OrdenablePaginableCrudRepositorio<Producto> repo = new ProductoListrepositorio();
         repo.crear(new Producto("Mesa", 50));
         repo.crear(new Producto("Silla", 18));

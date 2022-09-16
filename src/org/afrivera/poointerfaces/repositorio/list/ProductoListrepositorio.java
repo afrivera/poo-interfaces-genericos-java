@@ -3,13 +3,14 @@ package org.afrivera.poointerfaces.repositorio.list;
 import org.afrivera.poointerfaces.modelo.Producto;
 import org.afrivera.poointerfaces.repositorio.AbstractaListRepositorio;
 import org.afrivera.poointerfaces.repositorio.Direccion;
+import org.afrivera.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoListrepositorio extends AbstractaListRepositorio<Producto> {
     @Override
-    public void editar(Producto producto) {
+    public void editar(Producto producto) throws LecturaAccesoDatoException {
         Producto p = porId(producto.getId());
         p.setDescripcion(producto.getDescripcion());
         p.setPrecio(producto.getPrecio());
