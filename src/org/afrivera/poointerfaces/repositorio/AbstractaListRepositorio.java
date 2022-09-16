@@ -1,8 +1,7 @@
 package org.afrivera.poointerfaces.repositorio;
 
 import org.afrivera.poointerfaces.modelo.BaseEntity;
-import org.afrivera.poointerfaces.repositorio.excepciones.EscrituraAccesoDatosException;
-import org.afrivera.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
+import org.afrivera.poointerfaces.repositorio.excepciones.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +41,10 @@ public abstract class AbstractaListRepositorio<T extends BaseEntity> implements 
     public void crear(T t) throws EscrituraAccesoDatosException {
         if(t==null){
             throw new EscrituraAccesoDatosException("Error al insertar un objeto null");
+        }
+        if(this.dataSource.contains(t)){
+            throw  new RegistroDuplicadoAccesoDatoException("Error el objecto con id: " +
+                    t.getId() + " ya existe en el repositorio");
         }
         this.dataSource.add(t);
     }
